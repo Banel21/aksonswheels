@@ -1724,20 +1724,103 @@
             chatbotWindow.style.display = 'none';
         });
 
-        // Chatbot responses
-        const botResponses = {
-            'hello': 'Hello! How can I assist you with your vehicle needs today?',
-            'hi': 'Hi there! Welcome to Aksons Wheels Durban. How can I help you?',
-            'test drive': 'You can book a test drive through our website. Would you like me to direct you to the booking section?',
-            'service': 'We offer various vehicle services. You can book a service appointment online. Would you like to see our service options?',
-            'price': 'Our vehicle prices vary based on the model and specifications. Would you like information about a specific vehicle?',
-            'hours': 'Our business hours are: Monday-Friday: 8:30am-6pm, Saturday: 9am-4pm, Sunday: 10am-2pm.',
-            'location': 'We are located at 123 Automotive Avenue, Durban Central, eThekwini, 4001.',
-            'contact': 'You can reach us at (031) 123-4567 or email info@aksonswheelsdurban.co.za.',
-            'finance': 'We offer flexible financing options with competitive rates. Would you like to speak with our finance department?',
-            'thank': 'You\'re welcome! Is there anything else I can help you with?',
-            'default': 'I\'m sorry, I didn\'t understand that. Could you please rephrase your question? You can ask me about test drives, services, pricing, or our business hours.'
-        };
+      // Enhanced Chatbot responses with more cars and responses
+const botResponses = {
+    // Greetings
+    'hello': 'Hello! Welcome to Aksons Wheels Durban. How can I assist you with your vehicle needs today?',
+    'hi': 'Hi there! Thank you for contacting Aksons Wheels Durban. What can I help you with today?',
+    'good morning': 'Good morning! Welcome to Aksons Wheels Durban. How may I assist you today?',
+    'good afternoon': 'Good afternoon! Thank you for reaching out to Aksons Wheels Durban. How can I help you?',
+    'good evening': 'Good evening! Welcome to Aksons Wheels Durban. What can I assist you with?',
+    
+    // Services
+    'test drive': 'You can book a test drive through our website booking section. We offer test drives for all our vehicles including Toyota, Chery, Volkswagen, Suzuki, and more. Would you like me to direct you to the booking section?',
+    'service': 'We offer comprehensive vehicle services including oil changes (R450), brake services (R850), tire rotations (R300), and full maintenance packages (R1,200). All work is done by certified technicians using genuine parts.',
+    'maintenance': 'We provide complete vehicle maintenance services performed by certified technicians. Our services include routine maintenance, diagnostics, and repairs with a 6-month warranty on all work.',
+    'repair': 'Our certified technicians can handle all types of vehicle repairs from minor fixes to major overhauls. We use genuine parts and offer a 6-month warranty on all repair work.',
+    
+    // Vehicle Information - Expanded with more models
+    'price': 'Our vehicle prices range from R250,000 to R600,000 depending on the model. For example: Toyota Corolla Cross (R485,900), Chery Tiggo 4 Pro (R329,900), Volkswagen Polo Vivo (R268,900), Suzuki Jimny (R359,900), Hyundai Creta (R429,900). Which model interests you?',
+    'inventory': 'We have a wide selection of vehicles including:\n• Toyota Corolla Cross - R485,900\n• Chery Tiggo 4 Pro - R329,900\n• Volkswagen Polo Vivo - R268,900\n• Suzuki Jimny - R359,900\n• Hyundai Creta - R429,900\n• Ford Ranger - R589,900\n• Nissan Navara - R549,900\n• GWM P-Series - R479,900\n• Mahindra Scorpio - R389,900\n• Isuzu D-Max - R519,900',
+    'available': 'We currently have various models available including SUVs, hatchbacks, sedans, and bakkies. Our popular models include Toyota, Chery, Volkswagen, Suzuki, Hyundai, Ford, and more. What type of vehicle are you looking for?',
+    'new cars': 'We offer new vehicles from Toyota, Chery, Volkswagen, Suzuki, Hyundai, Ford, Nissan, GWM, Mahindra, and Isuzu. All new vehicles come with manufacturer warranties and service plans.',
+    'used cars': 'We have quality pre-owned vehicles that undergo 120-point inspections. Our pre-owned vehicles come with a 3-month warranty and include models like Toyota Corolla, VW Polo, Ford Figo, and Hyundai i20.',
+    
+    // Specific Car Models - Expanded
+    'toyota': 'We have several Toyota models:\n• Toyota Corolla Cross - R485,900 (Compact SUV)\n• Toyota Starlet - R289,900 (Hatchback)\n• Toyota Hilux - R569,900 (Bakkie)\n• Toyota Fortuner - R689,900 (Large SUV)\nAll Toyotas come with excellent resale value and reliability.',
+    'chery': 'Chery offers great value:\n• Chery Tiggo 4 Pro - R329,900 (Compact SUV)\n• Chery Tiggo 7 Pro - R459,900 (Midsize SUV)\n• Chery Tiggo 8 Pro - R589,900 (7-seater SUV)\nAll Chery models include 5-year/100,000km warranty.',
+    'volkswagen': 'Volkswagen models available:\n• VW Polo Vivo - R268,900 (Hatchback)\n• VW Polo TSI - R359,900 (Hatchback)\n• VW T-Cross - R429,900 (Compact SUV)\n• VW Amarok - R589,900 (Bakkie)\nKnown for German engineering and build quality.',
+    'suzuki': 'Suzuki models in stock:\n• Suzuki Jimny - R359,900 (4x4 Compact)\n• Suzuki Vitara - R389,900 (Compact SUV)\n• Suzuki Swift - R279,900 (Hatchback)\n• Suzuki Ertiga - R329,900 (7-seater MPV)\nExcellent fuel efficiency and reliability.',
+    'hyundai': 'Hyundai selection:\n• Hyundai Creta - R429,900 (Compact SUV)\n• Hyundai Venue - R359,900 (Compact SUV)\n• Hyundai i20 - R289,900 (Hatchback)\n• Hyundai Tucson - R529,900 (Midsize SUV)\n5-year/150,000km warranty included.',
+    'ford': 'Ford models available:\n• Ford Ranger - R589,900 (Bakkie)\n• Ford Everest - R639,900 (Large SUV)\n• Ford Puma - R389,900 (Compact SUV)\n• Ford EcoSport - R349,900 (Compact SUV)\nBuilt tough with advanced technology.',
+    'nissan': 'Nissan vehicles:\n• Nissan Navara - R549,900 (Bakkie)\n• Nissan X-Trail - R489,900 (SUV)\n• Nissan Qashqai - R439,900 (Compact SUV)\n• Nissan Magnite - R299,900 (Compact SUV)\nInnovative technology and comfort.',
+    'gwm': 'GWM models:\n• GWM P-Series - R479,900 (Bakkie)\n• GWM Haval Jolion - R369,900 (Compact SUV)\n• GWM Haval H6 - R489,900 (Midsize SUV)\nExcellent value with premium features.',
+    'mahindra': 'Mahindra selection:\n• Mahindra Scorpio - R389,900 (SUV)\n• Mahindra XUV300 - R329,900 (Compact SUV)\n• Mahindra Pik Up - R359,900 (Bakkie)\nRugged and reliable vehicles.',
+    'isuzu': 'Isuzu models:\n• Isuzu D-Max - R519,900 (Bakkie)\n• Isuzu MU-X - R569,900 (SUV)\nKnown for durability and low running costs.',
+    
+    // Vehicle Types
+    'suv': 'We have several SUV options:\nCompact: Chery Tiggo 4 Pro (R329,900), Toyota Corolla Cross (R485,900)\nMidsize: Hyundai Tucson (R529,900), GWM Haval H6 (R489,900)\nLarge: Ford Everest (R639,900), Toyota Fortuner (R689,900)\nWhich size are you interested in?',
+    'hatchback': 'Hatchback options:\n• VW Polo Vivo - R268,900\n• Suzuki Swift - R279,900\n• Hyundai i20 - R289,900\n• Toyota Starlet - R289,900\nPerfect for city driving and fuel efficiency.',
+    'bakkie': 'Bakkie selection:\n• Ford Ranger - R589,900\n• Toyota Hilux - R569,900\n• Nissan Navara - R549,900\n• Isuzu D-Max - R519,900\n• GWM P-Series - R479,900\n• Mahindra Pik Up - R359,900\nWorkhorse or lifestyle, we have the right bakkie for you.',
+    'sedan': 'Sedan models:\n• Toyota Corolla Quest - R359,900\n• VW Jetta - R429,900\n• Hyundai Elantra - R389,900\nComfortable and efficient for family use.',
+    'electric': 'We currently offer hybrid vehicles with full electric models coming soon. The Toyota Corolla Cross Hybrid offers excellent fuel efficiency at 4.3L/100km.',
+    'hybrid': 'We have hybrid options including the Toyota Corolla Cross Hybrid (R529,900) that delivers exceptional fuel economy and lower emissions.',
+    
+    // Financing
+    'finance': 'We offer flexible financing through major banks with terms from 12 to 72 months. Our finance specialists can help you get approved quickly with competitive rates. Typical deposit requirements start from 10%.',
+    'loan': 'We work with ABSA, FNB, Standard Bank, and Nedbank to secure the best financing deals. Loan approval typically takes 24-48 hours with minimal documentation required.',
+    'payment': 'We can calculate monthly payments based on your budget. For example, a R300,000 vehicle with 10% deposit over 60 months would be approximately R6,500 per month. What\'s your budget range?',
+    'interest rate': 'Current interest rates range from prime + 1% for excellent credit to prime + 3% for average credit. Our best customers can get rates as low as 9.5% (prime + 1%).',
+    'deposit': 'Minimum deposit requirements start from 10% for qualified buyers. We also accept trade-ins as part of your deposit. The higher your deposit, the better your interest rate.',
+    'credit': 'We help customers with all credit profiles. Even if you\'ve been declined elsewhere, we might be able to help through our specialist finance partners.',
+    
+    // Trade-ins
+    'trade in': 'We offer competitive trade-in values and can provide an instant online estimate. Just tell me your vehicle\'s make, model, year, and mileage for a rough valuation.',
+    'sell my car': 'We accept trade-ins and can make you a cash offer for your current vehicle. Our appraisal considers condition, service history, and market demand.',
+    'valuation': 'For a quick valuation, I\'d need to know: make, model, year, mileage, and overall condition. Most vehicles retain 40-60% of their value after 5 years.',
+    
+    // Business Information
+    'hours': 'Our business hours are:\nMonday-Friday: 8:30am-6pm\nSaturday: 9am-4pm\nSunday: 10am-2pm\nWe\'re here to help you find your perfect vehicle!',
+    'location': 'We are located at 123 Automotive Avenue, Durban Central, eThekwini, 4001. Easy access from N2 highway with ample parking.',
+    'contact': 'Call us at (031) 123-4567, email info@aksonswheelsdurban.co.za, or visit our showroom. You can also WhatsApp us at 071 234 5678 for quick responses.',
+    'about': 'Aksons Wheels Durban is a family-owned dealership with 20+ years experience. We specialize in affordable, reliable vehicles with exceptional customer service and after-sales support.',
+    'team': 'Our experienced team includes sales specialists, finance experts, and certified technicians. We\'re committed to helping you find the right vehicle for your needs and budget.',
+    
+    // Warranties and Services
+    'warranty': 'New vehicles: 3-5 year manufacturer warranty\nPre-owned: 3-month comprehensive warranty\nServices: 6-month warranty on all work\nWe stand behind every vehicle we sell.',
+    'guarantee': 'All our vehicles come with warranties and our satisfaction guarantee. If you\'re not happy with your purchase, we\'ll work to make it right.',
+    'service plan': 'Most new vehicles include service plans. We also offer optional service plans for pre-owned vehicles starting from R350 per month.',
+    'insurance': 'We can arrange comprehensive insurance through our partners at competitive rates. Typical cost is 3-5% of vehicle value annually.',
+    
+    // Appointments and Bookings
+    'appointment': 'You can book appointments online for:\n• Test drives\n• Service & maintenance\n• Sales consultations\n• Finance applications\n• Trade-in appraisals\nWhat type of appointment do you need?',
+    'booking': 'Our online booking system is available 24/7. You can select your preferred date and time for test drives, services, or meetings with our sales team.',
+    'availability': 'We typically have test drive slots available within 24 hours. Service appointments are available within 2-3 days. Emergency repairs can often be accommodated same-day.',
+    
+    // Special Offers
+    'special': 'Current special offers:\n• R10,000 discount on Chery Tiggo 4 Pro\n• 0% deposit on selected Suzuki models\n• Free 3-year service plan on new Toyotas\n• R15,000 trade-in bonus this month',
+    'promotion': 'This month\'s promotions include discounted insurance, free accessories, and special finance rates. Visit our showroom for the latest deals.',
+    'discount': 'We offer various discounts including loyalty discounts, cash purchase discounts, and seasonal promotions. Current special: R10,000 off all demo models.',
+    
+    // General Help
+    'help': 'I can help you with:\n• Vehicle information and pricing\n• Test drive bookings\n• Service appointments\n• Financing options\n• Trade-in valuations\n• Business information\nWhat would you like to know?',
+    'options': 'We offer:\n• New & pre-owned vehicle sales\n• Financing & insurance\n• Trade-ins\n• Service & maintenance\n• Parts & accessories\n• Vehicle delivery\nWhich service interests you?',
+    'what can you do': 'I can:\n• Provide vehicle information and prices\n• Help book test drives and services\n• Explain financing options\n• Give business details\n• Answer general questions\nHow can I assist you today?',
+    
+    // Features and Specifications
+    'features': 'Our vehicles include features like:\n• Touchscreen infotainment\n• Apple CarPlay/Android Auto\n• Reverse cameras\n• LED lighting\n• Safety systems\n• Climate control\nWhich model\'s features would you like to know about?',
+    'fuel consumption': 'Fuel efficiency varies by model:\n• Hatchbacks: 5-6L/100km\n• Compact SUVs: 6-7L/100km\n• Bakkies: 7-9L/100km\n• Hybrids: 4-5L/100km\nWhich type are you considering?',
+    'safety': 'All our vehicles meet SA safety standards with features like:\n• ABS brakes\n• Airbags\n• Stability control\n• Rear parking sensors\nMany models include advanced safety systems.',
+    
+    // Closing
+    'thank': 'You\'re welcome! Is there anything else I can help you with today?',
+    'thanks': 'You\'re very welcome! Feel free to ask if you need any more information about our vehicles or services.',
+    'bye': 'Thank you for chatting with Aksons Wheels Durban! Have a great day and visit us soon for a test drive.',
+    'goodbye': 'Goodbye! Thank you for considering Aksons Wheels Durban. We look forward to helping you find your perfect vehicle!',
+    
+    // Default response
+    'default': 'I\'m sorry, I didn\'t quite understand that. Could you please rephrase your question? I can help with vehicle information, pricing, bookings, financing, services, or general inquiries about Aksons Wheels Durban.'
+};
 
         function addMessage(message, isUser = false) {
             const messageDiv = document.createElement('div');
@@ -1747,31 +1830,160 @@
             chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
         }
 
-        function getBotResponse(userMessage) {
-            userMessage = userMessage.toLowerCase();
-            
-            if (userMessage.includes('hello') || userMessage.includes('hi')) {
-                return botResponses['hello'];
-            } else if (userMessage.includes('test drive')) {
-                return botResponses['test drive'];
-            } else if (userMessage.includes('service')) {
-                return botResponses['service'];
-            } else if (userMessage.includes('price') || userMessage.includes('cost')) {
-                return botResponses['price'];
-            } else if (userMessage.includes('hour') || userMessage.includes('open')) {
-                return botResponses['hours'];
-            } else if (userMessage.includes('location') || userMessage.includes('address')) {
-                return botResponses['location'];
-            } else if (userMessage.includes('contact') || userMessage.includes('phone') || userMessage.includes('email')) {
-                return botResponses['contact'];
-            } else if (userMessage.includes('finance') || userMessage.includes('loan')) {
-                return botResponses['finance'];
-            } else if (userMessage.includes('thank')) {
-                return botResponses['thank'];
-            } else {
-                return botResponses['default'];
-            }
-        }
+      function getBotResponse(userMessage) {
+    userMessage = userMessage.toLowerCase();
+    
+    // Greetings
+    if (userMessage.includes('hello') || userMessage.includes('hi ')) {
+        return botResponses['hello'];
+    } else if (userMessage.includes('good morning')) {
+        return botResponses['good morning'];
+    } else if (userMessage.includes('good afternoon')) {
+        return botResponses['good afternoon'];
+    } else if (userMessage.includes('good evening')) {
+        return botResponses['good evening'];
+    }
+    
+    // Services
+    else if (userMessage.includes('test drive')) {
+        return botResponses['test drive'];
+    } else if (userMessage.includes('service') || userMessage.includes('maintenance')) {
+        return botResponses['service'];
+    } else if (userMessage.includes('repair')) {
+        return botResponses['repair'];
+    }
+    
+    // Vehicle Information
+    else if (userMessage.includes('price') || userMessage.includes('cost') || userMessage.includes('how much')) {
+        return botResponses['price'];
+    } else if (userMessage.includes('inventory') || userMessage.includes('available') || userMessage.includes('what do you have') || userMessage.includes('stock')) {
+        return botResponses['inventory'];
+    } else if (userMessage.includes('new car') || userMessage.includes('new vehicle')) {
+        return botResponses['new cars'];
+    } else if (userMessage.includes('used car') || userMessage.includes('pre-owned') || userMessage.includes('second hand')) {
+        return botResponses['used cars'];
+    }
+    
+    // Specific Brands and Models
+    else if (userMessage.includes('toyota')) {
+        return botResponses['toyota'];
+    } else if (userMessage.includes('chery')) {
+        return botResponses['chery'];
+    } else if (userMessage.includes('volkswagen') || userMessage.includes('vw')) {
+        return botResponses['volkswagen'];
+    } else if (userMessage.includes('suzuki')) {
+        return botResponses['suzuki'];
+    } else if (userMessage.includes('hyundai')) {
+        return botResponses['hyundai'];
+    } else if (userMessage.includes('ford')) {
+        return botResponses['ford'];
+    } else if (userMessage.includes('nissan')) {
+        return botResponses['nissan'];
+    } else if (userMessage.includes('gwm')) {
+        return botResponses['gwm'];
+    } else if (userMessage.includes('mahindra')) {
+        return botResponses['mahindra'];
+    } else if (userMessage.includes('isuzu')) {
+        return botResponses['isuzu'];
+    }
+    
+    // Vehicle Types
+    else if (userMessage.includes('suv')) {
+        return botResponses['suv'];
+    } else if (userMessage.includes('hatchback')) {
+        return botResponses['hatchback'];
+    } else if (userMessage.includes('bakkie') || userMessage.includes('pickup') || userMessage.includes('pick up')) {
+        return botResponses['bakkie'];
+    } else if (userMessage.includes('sedan')) {
+        return botResponses['sedan'];
+    } else if (userMessage.includes('electric') || userMessage.includes('ev')) {
+        return botResponses['electric'];
+    } else if (userMessage.includes('hybrid')) {
+        return botResponses['hybrid'];
+    }
+    
+    // Financing
+    else if (userMessage.includes('finance') || userMessage.includes('loan') || userMessage.includes('payment plan')) {
+        return botResponses['finance'];
+    } else if (userMessage.includes('interest rate')) {
+        return botResponses['interest rate'];
+    } else if (userMessage.includes('deposit')) {
+        return botResponses['deposit'];
+    } else if (userMessage.includes('credit') || userMessage.includes('approval')) {
+        return botResponses['credit'];
+    }
+    
+    // Trade-ins
+    else if (userMessage.includes('trade') || userMessage.includes('sell my car') || userMessage.includes('part exchange')) {
+        return botResponses['trade in'];
+    } else if (userMessage.includes('valuation') || userMessage.includes('value') || userMessage.includes('worth')) {
+        return botResponses['valuation'];
+    }
+    
+    // Business Information
+    else if (userMessage.includes('hour') || userMessage.includes('open') || userMessage.includes('close')) {
+        return botResponses['hours'];
+    } else if (userMessage.includes('location') || userMessage.includes('address') || userMessage.includes('where')) {
+        return botResponses['location'];
+    } else if (userMessage.includes('contact') || userMessage.includes('phone') || userMessage.includes('email') || userMessage.includes('whatsapp')) {
+        return botResponses['contact'];
+    } else if (userMessage.includes('about')) {
+        return botResponses['about'];
+    } else if (userMessage.includes('team')) {
+        return botResponses['team'];
+    }
+    
+    // Warranties and Services
+    else if (userMessage.includes('warranty') || userMessage.includes('guarantee')) {
+        return botResponses['warranty'];
+    } else if (userMessage.includes('service plan')) {
+        return botResponses['service plan'];
+    } else if (userMessage.includes('insurance')) {
+        return botResponses['insurance'];
+    }
+    
+    // Appointments
+    else if (userMessage.includes('appointment') || userMessage.includes('booking') || userMessage.includes('schedule')) {
+        return botResponses['appointment'];
+    } else if (userMessage.includes('availability') || userMessage.includes('when can i come')) {
+        return botResponses['availability'];
+    }
+    
+    // Special Offers
+    else if (userMessage.includes('special') || userMessage.includes('promotion') || userMessage.includes('deal')) {
+        return botResponses['special'];
+    } else if (userMessage.includes('discount')) {
+        return botResponses['discount'];
+    }
+    
+    // Features and Specifications
+    else if (userMessage.includes('feature')) {
+        return botResponses['features'];
+    } else if (userMessage.includes('fuel') || userMessage.includes('consumption') || userMessage.includes('economy')) {
+        return botResponses['fuel consumption'];
+    } else if (userMessage.includes('safety')) {
+        return botResponses['safety'];
+    }
+    
+    // General Help
+    else if (userMessage.includes('help') || userMessage.includes('what can you do')) {
+        return botResponses['help'];
+    } else if (userMessage.includes('option')) {
+        return botResponses['options'];
+    }
+    
+    // Closing
+    else if (userMessage.includes('thank')) {
+        return botResponses['thank'];
+    } else if (userMessage.includes('bye') || userMessage.includes('goodbye')) {
+        return botResponses['bye'];
+    }
+    
+    // Default response
+    else {
+        return botResponses['default'];
+    }
+}
 
         function sendMessage() {
             const userMessage = chatbotInput.value.trim();
@@ -1803,3 +2015,4 @@
 </body>
 
 </html>
+
